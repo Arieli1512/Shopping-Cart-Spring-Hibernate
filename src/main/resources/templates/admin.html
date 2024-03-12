@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products</title>
+    <link rel="stylesheet" type="text/css" href="/css/style1.css" />
+</head>
+<body>
+<th:block th:insert="~{/_header}"></th:block>
+<th:block th:insert="~{/_menu}"></th:block>
+<h1>All Products</h1>
+
+<!-- Add Product Form -->
+<h2>Add Product</h2>
+<form th:action="@{/admin/products/add}" method="post">
+    <input type="text" name="name" placeholder="Product Name" required>
+    <input type="text" name="description" placeholder="Product Description" required>
+    <input type="number" step=".01"  name="price" placeholder="Product Price" required>
+    <button type="submit">Add</button>
+</form>
+
+<!-- Delete Product Form -->
+<h2>Delete Product</h2>
+<form th:action="@{/admin/products/delete}" method="post">
+    <select name="productId">
+        <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+    </select>
+    <button type="submit">Delete</button>
+</form>
+
+<!-- Display Products -->
+<h2>Product List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.price}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

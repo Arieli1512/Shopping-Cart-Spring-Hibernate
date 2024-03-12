@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Management</title>
+    <link rel="stylesheet" type="text/css" href="/css/style1.css" />
+</head>
+<body>
+<th:block th:insert="~{/_header}"></th:block>
+<th:block th:insert="~{/_menu}"></th:block>
+<h1>User Management</h1>
+
+<!-- User List -->
+<h2>All Users</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.roles}"></td>
+        <td>
+            <a th:href="@{/admin/users/edit/{id}(id=${user.id})}">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Add User Form -->
+<h2>Add User</h2>
+<form th:action="@{/admin/users/add}" method="post">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="text" name="roles" placeholder="Role" required>
+    <button type="submit">Add</button>
+</form>
+
+<h2>Delete User</h2>
+<form th:action="@{/admin/users/delete}" method="post">
+    <select name="userId">
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+    </select>
+    <button type="submit">Delete</button>
+</form>
+</body>
+</html>

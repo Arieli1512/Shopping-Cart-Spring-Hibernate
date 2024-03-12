@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account Information</title>
+    <link rel="stylesheet" type="text/css" href="/css/style1.css" />
+</head>
+<body>
+<th:block th:insert="~{/_header}"></th:block>
+<th:block th:insert="~{/_menu}"></th:block>
+<h1>Account Information</h1>
+<p>Username: <span th:text="${#authentication.principal.username}"></span></p>
+<h2>Your Orders</h2>
+<table border="0px">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.created}"></td>
+        <td th:text="${order.status}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

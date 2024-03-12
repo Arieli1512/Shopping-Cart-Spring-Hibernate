@@ -1,0 +1,21 @@
+<div class="menu-container"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns="http://www.w3.org/1999/html">
+    <div>
+        <a th:href="@{/order/cart}" class="cart-ico">
+            <div>
+                <span>Koszyk (</span>
+                <span th:text="${@cart.counter}"></span>
+                <span>)</span>
+                <span th:text="${@cart.sum}"></span>
+                <span>zł</span>
+            </div>
+        </a>
+        <th:block sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin}">
+                Admin panel
+            </a>
+            |
+        </th:block>
+    </div>
+</div>
